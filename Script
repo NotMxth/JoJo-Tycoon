@@ -1,6 +1,12 @@
 _G.DarkMode = true
 _G.Keybind = "Semicolon"
 
+--------------Settings--------------
+
+-- local tycoon = "Stardust Crusaders"
+
+--------------Script----------------
+
 if game.CoreGui:FindFirstChild("FinityUI") then
 	game.CoreGui["FinityUI"]:Destroy()
 end
@@ -12,31 +18,95 @@ FinityWindow.ChangeToggleKey(Enum.KeyCode[_G.Keybind])
 local FinityStatusPage = FinityWindow:Category("Status")
 local FinityMainCategory = FinityWindow:Category("Autofarm")
 local FinityTeleportsCategory = FinityWindow:Category("Teleports")
-local FinityItemsCategory = FinityWindow:Category("Items")
 local FinityMiscellaneousCategory = FinityWindow:Category("Miscellaneous")
+local FinityItemsCategory = FinityWindow:Category("Items")
 
 local FinityAutofarmSector = FinityMainCategory:Sector("Autofarm")
 local FinityTycoonTeleportSector = FinityTeleportsCategory:Sector("Tycoon Teleports")
 local FinityOtherTeleportSector = FinityTeleportsCategory:Sector("Other Teleports")
 local FinityItemsSector = FinityItemsCategory:Sector("Items")
+local FinityMiscellaneousSector = FinityMiscellaneousCategory:Sector("Teleports:")
 
 wait(2.5)
 local FinityStatusSpacing = FinityStatusPage:Sector("                                                           ")
 local FinityStatusSpacing = FinityStatusPage:Sector("                                                           ")
-local FinityStatusSector1 = FinityStatusPage:Sector("             Autofarm: Work in Progress")
+local FinityStatusSector1 = FinityStatusPage:Sector("             Autofarm: Roughly Done")
 local FinityStatusSector2 = FinityStatusPage:Sector("             Teleports: Up to Date")
 local FinityStatusSector3 = FinityStatusPage:Sector("             Miscellaneous: Work in Progress")
 local FinityStatusSector4 = FinityStatusPage:Sector("             Items: Work in Progress")
 
 game:GetService("CoreGui").FinityUI.Container.Categories.Status.R["             Teleports: Up to Date"].Title.TextColor3 = Color3.new(0, 215, 0)
-game:GetService("CoreGui").FinityUI.Container.Categories.Status.L["             Autofarm: Work in Progress"].Title.TextColor3 = Color3.new(.5, .5, .5)
+game:GetService("CoreGui").FinityUI.Container.Categories.Status.L["             Autofarm: Roughly Done"].Title.TextColor3 = Color3.new(1, .7, 0)
 game:GetService("CoreGui").FinityUI.Container.Categories.Status.L["             Miscellaneous: Work in Progress"].Title.TextColor3 = Color3.new(.5, .5, .5)
 game:GetService("CoreGui").FinityUI.Container.Categories.Status.R["             Items: Work in Progress"].Title.TextColor3 = Color3.new(.5, .5, .5)
 
-FinityAutofarmSector:Cheat("Label", "Some features are being worked on.")
+FinityAutofarmSector:Cheat("Label", "Alot of features are being worked on, if you find errors join this server: dsc.gg/jojotycoon")
+FinityAutofarmSector:Cheat("Dropdown", "   Automatically Mine for", function(Tycoon)
+while wait() do
+fireclickdetector(game:GetService("Workspace")["Zednov's Tycoon Kit"].Tycoons[Tycoon].PurchasedObjects.Mine.Clicker.ClickDetector)
+end
+end, {
+	options = {
+		"Phantom Blood",
+		"Battle Tendency",
+		"Stardust Crusaders",
+        "Diamond is Unbreakable",
+        "Golden Wind",
+        "Stone Ocean",
+        "Steel Ball Run",
+        "JoJolion"
+	}
+})
 
+FinityAutofarmSector:Cheat("Dropdown", "   Autobuy for", function(autobuyTycoon)
+while wait(1) do
+for i,v in pairs(game:GetService("Workspace")["Zednov's Tycoon Kit"].Tycoons:GetDescendants()) do
+	if v:IsA("Part") and v.Name == "Head" and v.Parent.Parent.Parent.Name == autobuyTycoon then
+		firetouchinterest(game.Players.LocalPlayer.Character.Head, v, 1)
+			wait()
+		firetouchinterest(game.Players.LocalPlayer.Character.Head, v, 0)
+		end
+	end
+end
+end, {
+	options = {
+		"Phantom Blood",
+		"Battle Tendency",
+		"Stardust Crusaders",
+        "Diamond is Unbreakable",
+        "Golden Wind",
+        "Stone Ocean",
+        "Steel Ball Run",
+        "JoJolion"
+	}
+})
 
--- Tycoon Teleports --
+FinityAutofarmSector:Cheat("Button", "   Auto Rebirth: Rebirths", function()
+    while wait(1.25) do
+	firesignal(game:GetService("Players").LocalPlayer.PlayerGui["RebirthGui (Don't Move)"].RebirthFrame.Button.MouseButton1Down)
+    end
+end)
+
+FinityAutofarmSector:Cheat("Button", "   Auto Rebirth: T. Rebirths", function()
+	while wait(1.25) do
+    firesignal(game:GetService("Workspace").Map.Houses.PlamInside.Book.ClickDetector.Script.TrueRebirthGui.TrueRebirthFrame.Button.MouseButton1Down)
+    end
+end)
+
+game:GetService("CoreGui").FinityUI.Container.Categories.Autofarm.L.Autofarm.Container["   Auto Rebirth: T. Rebirths"].Container.Button.Text = "Activate"
+game:GetService("CoreGui").FinityUI.Container.Categories.Autofarm.L.Autofarm.Container["   Auto Rebirth: Rebirths"].Container.Button.Text = "Activate"
+
+FinityMiscellaneousSector:Cheat("Label", "     Enable this to teleport")
+
+FinityMiscellaneousSector:Cheat("Button", "     Disable Protections", function()
+	for i,v in pairs(game:GetService("Workspace")["Zednov's Tycoon Kit"].Tycoons:GetDescendants()) do
+		if v.Name == "Protection" then
+			v:Destroy()
+		end
+	end
+end)
+
+game:GetService("CoreGui").FinityUI.Container.Categories.Miscellaneous.L["Teleports:"].Container["     Disable Protections"].Container.Button.Text = "Disable"
 
 FinityTycoonTeleportSector:Cheat("Button", "Goto Phantom Blood", function()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-0.71632051467896, -81.868209838867, 143.00392150879)
